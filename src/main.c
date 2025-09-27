@@ -30,9 +30,10 @@ static int app_init(void) {
 static int app_loop(void) {
 	int ch;
 
-	ch = getch();
-
+	
 	for (; ; ) {
+		ch = getch();
+
 		switch (ch) {
 		case 'q':
 			return 0;
@@ -49,10 +50,15 @@ static int app_loop(void) {
 static int test(void) {
 	struct tetris_board board;
 	int i;
+	char res;
 
 	memset(&board, 0x00, sizeof(board));
 
 	game_init_board(&board);
+
+	game_set_pos_val(&board, 0, 0, 1);
+	game_get_pos_val(&board, 0, 0, &res);
+	printw("%d\n", res);
 
 	for (i = 0; i < board.size; i++) {
 		printw("%d ", board.field[i]);
@@ -78,14 +84,11 @@ int main(int argc, char const *argv[])
 {	
 	app_init();
 
-	printw("Hello World!");
-
 	test();
 
 	app_loop();
 
-	//app_deinit();
-	endwin();
+	app_deinit();
 
 	return 0;
 }
