@@ -24,7 +24,7 @@ BASE_CFLAGS = \
 	-Wdeclaration-after-statement
     # -Wno-unused-parameter # Uncomment if you have functions with intentionally unused parameters (e.g., callbacks)
 CPPFLAGS = -Iinclude
-LDFLAGS =
+LDFLAGS = -lncurses
 
 # --- Build Configuration (Debug vs Release) ---
 ifeq ($(DEBUG), 1)
@@ -67,7 +67,7 @@ all: $(EXECUTABLE)
 $(EXECUTABLE): $(OBJECTS)
 	@echo "==> Linking to create $@..."
 	@mkdir -p $(BINDIR)
-	$(CC) $(LDFLAGS) -o $@ $^
+	$(CC) -o $@ $^ $(LDFLAGS)
 
 # Rule to compile a .c source file into a .o object file
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
