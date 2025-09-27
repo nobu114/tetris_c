@@ -15,7 +15,7 @@
 /* ボードの縦幅 */
 #define BOARD_HEIGHT 40
 /* どれだけ余分に配列のサイズを取るか */
-#define BOARD_MARGIN 10
+#define BOARD_MARGIN 5
 
 struct tetris_board {
 	char *field;

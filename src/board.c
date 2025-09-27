@@ -22,14 +22,14 @@
  */
 int game_init_board(struct tetris_board *board) {
 	int size;
-	int *p = NULL;
+	char *p = NULL;
 
 	if (board == NULL) {
 		return -EINVAL;
 	}
 
 	/* 領域の確保 */
-	size = (BOARD_WIDTH + BOARD_MARGIN) * (BOARD_HEIGHT + BOARD_MARGIN);
+	size = (BOARD_WIDTH + (BOARD_MARGIN * 2)) * (BOARD_HEIGHT + BOARD_MARGIN);
 	p = malloc((size_t)size);
 	if (p == NULL) {
 		return -errno;
@@ -78,7 +78,7 @@ int game_get_pos_val(struct tetris_board *board, int x, int y, char *res) {
 		return -EINVAL;
 	}
 
-	pos = x + (BOARD_WIDTH + BOARD_MARGIN) * y;
+	pos = x + (BOARD_WIDTH + (BOARD_MARGIN * 2)) * y;
 
 	if (pos >= board->size) {
 		return -ERANGE;
@@ -106,7 +106,7 @@ int game_set_pos_val(struct tetris_board *board, int x, int y, char val) {
 		return -EINVAL;
 	}
 
-	pos = x + (BOARD_WIDTH + BOARD_MARGIN) * y;
+	pos = x + (BOARD_WIDTH + (BOARD_MARGIN * 2)) * y;
 
 	if (pos >= board->size) {
 		return -ERANGE;
